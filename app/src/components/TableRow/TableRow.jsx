@@ -1,9 +1,10 @@
 import React from 'react';
 
 
-function PlayerRow(props) {
-  const {player} = props;
-  return (
+function getPlayers(players) {
+  let output = [];
+  for (const player of players) {
+    output.push(
     <tr>
       <td>{player.player}</td>
       <td>{player.team}</td>
@@ -21,8 +22,15 @@ function PlayerRow(props) {
       <td>{player.fourty_plush_rush}</td>
       <td>{player.fum}</td>
     </tr>
+    )
+  }
+  return output;
+}
+
+export function TableRow(props) {
+  const {players} = props;
+  return (
+    getPlayers(players)
   );
 }
 
-
-export default PlayerRow;

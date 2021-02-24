@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import TableHeader from './components/TableHeader'
-import PlayerRow from './components/PlayerRow'
+import TableRow from './components/TableRow'
 import axios from 'axios'
 import Paginator from './components/Paginator';
+import { Search } from './components/Search/Search';
 
 function App() {
   const headings = ["Name", "Team", "Pos", "Att/G", "Att", "Yds", "Avg", "Yds/G", "TD", "Lng", "1st", "1st %", "20+", "40+", "FUM"];
@@ -41,22 +42,6 @@ function App() {
     });
   })
 
-  function getHeading() {
-    let output = [];
-    for (let i=0; i<headings.length; i++) {
-      output.push(<TableHeader sortFunc={triggerSort} update heading={headings[i]} index={i} key={i} />)
-    }
-    return output;
-  }
-
-  function getPlayers() {
-    let output = [];
-    for (let i=0; i<players.length; i++) {
-      output.push(<PlayerRow player={players[i]} key={i}/>)
-    }
-    return output;
-  }
-
   function submitSearchName(e) {
     let text = document.getElementById("name").value;
     if (page > 1) setPage(1);
@@ -76,23 +61,19 @@ function App() {
     setPage(page);
   }
 
-
   return (
   <div>
-    <div className="form">
-      <input type="text" placeholder="name" name="name" id="name"></input>
-      <input type="submit" value="submit" onClick={submitSearchName}></input>
-    </div>
+    <Search submitSearchName={submitSearchName} />
 
     <div>
       <table>
         <thead>
         <tr>
-          {getHeading()}
+          <TableHeader headings={headings} sortFunc={triggerSort} />
         </tr>
         </thead>
         <tbody>
-          {getPlayers()}
+          <TableRow players={players} />
         </tbody>
       </table>
       <Paginator onChange={setPageAction} currentPage={paginationData.currentPage} nextPageUrl={paginationData.nextPageUrl} prevPageUrl={paginationData.prevPageUrl}/>

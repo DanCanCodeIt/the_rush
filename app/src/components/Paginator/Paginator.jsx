@@ -1,6 +1,7 @@
 import React from 'react';
+import "./style.css";
 
-function Paginator(props) {
+export function Paginator(props) {
   const { onChange, nextPageUrl, prevPageUrl, currentPage } = props;
 
   function incrementPage(e) {
@@ -11,12 +12,10 @@ function Paginator(props) {
   }
 
   return (
-    <>
+    <div className="root">
       { prevPageUrl && <button onClick={decrementPage}>prev</button> }
       <a>Page {currentPage}</a>
       { nextPageUrl && <button onClick={incrementPage}>next</button> }
-    </>
+    </div>
   );
 }
-
-export default Paginator;
