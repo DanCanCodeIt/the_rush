@@ -10,17 +10,10 @@ services:
       - api
   app:
     build: ./app
-    volumes: 
-      - "./app/:/app"
-    entrypoint: "npm run dev" 
   api:
     build: ./api
-    volumes: 
-      - "./api/:/app"
   db:
     image: mysql:5.7
     environment: 
       - "MYSQL_ROOT_PASSWORD=example"
       - "MYSQL_DATABASE=the_score"
-    ports:
-      - "3306:3306"  
