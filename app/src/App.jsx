@@ -14,6 +14,7 @@ function App() {
   const [players, setPlayers] = useState([]);
   const [searchName, setSearchName] = useState(null);
   const [sortBy, setSortBy] = useState(null);
+  const [dir, setDir] = useState('DESC');
   const [loading, setLoading] = useState(true);
   const [paginationData, setPaginationData] = useState({});
 
@@ -25,6 +26,7 @@ function App() {
     const queryParams = {
       'name': searchName ? searchName: null,
       'sort_by': sortBy ? sortBy : null,
+      'dir': dir,
       'page': page
     };
 
@@ -53,6 +55,10 @@ function App() {
   function triggerSort(index) {
     if (page > 1) setPage(1);
     setLoading(true);
+    if (codes[index] === sortBy) {
+     if (dir === 'DESC') setDir('ASC'); 
+     else setDir('DESC'); 
+    }
     setSortBy(codes[index]);
   }
 
