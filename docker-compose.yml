@@ -1,0 +1,25 @@
+services:
+  proxy:
+    image: nginx:1.19-alpine
+    volumes:
+      - ./proxy/templates/:/etc/nginx/templates
+    ports:
+      - 80:80
+    depends_on:
+      - app
+      - api
+  app:
+    build: ./app
+    volumes: 
+      - "./app/:/app"
+  api:
+    build: ./api
+    volumes: 
+      - "./api/:/app"
+  db:
+    image: mysql:5.7
+    environment: 
+      - "MYSQL_ROOT_PASSWORD=example"
+      - "MYSQL_DATABASE=the_score"
+    ports:
+      - "3306:3306"  
