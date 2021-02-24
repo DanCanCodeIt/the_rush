@@ -12,7 +12,7 @@ services:
     build: ./app
     volumes: 
       - "./app/:/app"
-    entrypoint: "npm run dev" 
+    entrypoint: "npm run start" 
   api:
     build: ./api
     volumes: 
